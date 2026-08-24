@@ -448,7 +448,7 @@ export default function Features() {
           <p className="text-[15px] leading-relaxed text-muted">
             Multi-tenant security and more, built into the same quality-first motion.
           </p>
-          <Button href="#platform" variant="outline" size="md" icon={ArrowRight} className="w-full shrink-0 border-brand bg-white text-ink hover:border-brand-hover hover:bg-white sm:w-auto">
+          <Button href="/features" variant="outline" size="md" icon={ArrowRight} className="w-full shrink-0 border-brand bg-white text-ink hover:border-brand-hover hover:bg-white sm:w-auto">
             Explore all Features
           </Button>
         </motion.div>

@@ -35,16 +35,22 @@ const PRIMARY_LINKS = [
 
 export default function Navbar() {
   const pathname = usePathname()
-  return <NavbarShell key={pathname} pathname={pathname} />
+  return <NavbarShell pathname={pathname} />
 }
 
 function NavbarShell({ pathname }: { pathname: string }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [lastPathname, setLastPathname] = useState(pathname)
   const reduceMotion = useReducedMotionPreference()
   const onHome = pathname === "/"
 
   const to = (href: string) => (href.startsWith("#") ? (onHome ? href : "/" + href) : href)
+
+  if (pathname !== lastPathname) {
+    setLastPathname(pathname)
+    setOpen(false)
+  }
 
   useEffect(() => {
     const updateHeader = () => setScrolled(window.scrollY > 16)

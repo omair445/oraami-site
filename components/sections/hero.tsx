@@ -70,7 +70,7 @@ export default function Hero() {
                   Get Started
                 </Button>
                 <Button
-                  href="#features"
+                  href="/features"
                   variant="outline"
                   size="md"
                   icon={ArrowRight}

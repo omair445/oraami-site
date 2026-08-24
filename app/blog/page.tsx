@@ -114,7 +114,6 @@ export default async function BlogPage({
   const activeCategory: Category = CATEGORIES.find((category) => category === categoryParam) ?? "All posts"
 
   const posts = getAllPosts()
-  const [featured] = posts
 
   const syncedMoreFromBlogPosts: MoreFromBlogPost[] = getLatestPosts(5).map((post, index) => ({
     category: post.category,
@@ -190,49 +189,7 @@ export default async function BlogPage({
 
       <section className="w-full bg-canvas">
         <div className="site-container py-20">
-          {featured && (
-            <Link
-              href={`/blog/${featured.slug}`}
-              className="group grid gap-6 rounded-[20px] border border-black/[0.06] bg-white p-4 shadow-[0_16px_40px_-36px_rgba(15,23,42,0.26)] transition-colors hover:border-brand/30 sm:p-5 lg:grid-cols-[1fr_1.1fr] lg:gap-10 lg:p-6"
-            >
-              <div className="relative min-h-[280px] overflow-hidden rounded-[16px] bg-oraami-accent-secondary lg:min-h-[340px]">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_100%,color-mix(in_srgb,var(--color-brand)_55%,transparent),transparent_65%)]"
-                />
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0"
-                  style={{
-                    backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.22) 1px, transparent 1.7px)",
-                    backgroundSize: "9px 9px",
-                    maskImage: "linear-gradient(to bottom, black 0%, transparent 85%)",
-                    WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 85%)",
-                  }}
-                />
-                <span className="absolute left-5 top-5 rounded-full bg-white/15 px-3 py-1.5 text-[11px] font-medium uppercase tracking-widest text-white backdrop-blur-sm">
-                  {featured.category}
-                </span>
-              </div>
-              <div className="flex max-w-2xl flex-col justify-center py-2 sm:py-4 lg:py-6">
-                <div className="flex items-center gap-3 text-[11px] uppercase tracking-widest text-faint">
-                  <time dateTime={featured.date}>{formatDate(featured.date)}</time>
-                  <span>·</span>
-                  <span>{featured.readingTime}</span>
-                </div>
-                <h2 className="mt-5 text-[30px] font-medium leading-tight tracking-[-0.02em] text-heading sm:text-[40px]">
-                  {featured.title}
-                </h2>
-                <p className="mt-4 text-[16px] leading-relaxed text-muted">{featured.excerpt}</p>
-                <span className="mt-7 inline-flex shrink-0 items-center gap-2 text-[13px] font-medium text-brand">
-                  Read the post
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
-                </span>
-              </div>
-            </Link>
-          )}
-
-          <div className="mt-10 flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {CATEGORIES.map((label) => (
               <CategoryPill key={label} label={label} isActive={label === activeCategory} />
             ))}

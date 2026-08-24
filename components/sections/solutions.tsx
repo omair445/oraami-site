@@ -6,6 +6,7 @@ import {
   motion,
   type MotionValue,
   useInView,
+  useMotionTemplate,
   useScroll,
   useSpring,
   useTransform,
@@ -176,11 +177,9 @@ function StackCard({
   const springConfig = { stiffness: 180, damping: 28, mass: 0.6 }
   const scale = useSpring(useTransform(stackProgress, [transitionStart, transitionEnd], [1, endScale]), springConfig)
   const coverOpacity = useSpring(useTransform(stackProgress, [transitionStart, transitionEnd], [0, 1]), springConfig)
-  const filter = useTransform(
-    stackProgress,
-    [transitionStart, transitionEnd],
-    ["brightness(1) blur(0px)", "brightness(0.84) blur(0.8px)"]
-  )
+  const brightness = useTransform(stackProgress, [transitionStart, transitionEnd], [1, 0.84])
+  const blurPx = useTransform(stackProgress, [transitionStart, transitionEnd], [0, 0.8])
+  const filter = useMotionTemplate`brightness(${brightness}) blur(${blurPx}px)`
   const motionStyle =
     reduceMotion || isLast
       ? { zIndex: index + 1, transformOrigin: "50% 0%", top: stickyTop }
